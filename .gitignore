@@ -1,13 +1,10 @@
-# Basics
+node_modules
 .DS_Store
-node_modules/
-dist/
-build/
+dist
+dist-ssr
+*.local
+.vscode
+.idea
 .env
-.venv/
-__pycache__/
-*.pyc
-
-# IDEs
-.vscode/
-.idea/
+.npm
+.eslintcache
