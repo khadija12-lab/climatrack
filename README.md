@@ -181,7 +181,7 @@ Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de
 
 ## Contact
 
-- **Développeur**: Hanae
+- **Développeur**: Hanae & Khadija
 - **Email**: [hanaechaib3@gmail.com]
 - **GitHub**: [@20Hanae20](https://github.com/20Hanae20)
 - **Projet**: https://github.com/20Hanae20/MeteoVision
