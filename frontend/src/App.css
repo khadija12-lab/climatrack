@@ -1,0 +1,520 @@
+:root {
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --secondary: #a855f7;
+  --accent: #22d3ee;
+  --bg-light: #f8fafc;
+  --bg-dark: #0f172a;
+  --text-light: #1e293b;
+  --text-dark: #f1f5f9;
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  transition: background-color 0.3s ease;
+  overflow-x: hidden;
+}
+
+.App {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.App.dark {
+  background-color: var(--bg-dark);
+  background-image:
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0, transparent 50%),
+    radial-gradient(at 50% 0%, rgba(168, 85, 247, 0.15) 0, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(34, 211, 238, 0.15) 0, transparent 50%);
+  color: var(--text-dark);
+}
+
+.App.light {
+  background-color: #f1f5f9;
+  background-image:
+    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.08) 0, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(34, 211, 238, 0.08) 0, transparent 50%);
+  color: #0f172a;
+}
+
+/* Glassmorphism Utility */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+.App.light .glass {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(20px);
+}
+
+/* Header */
+.app-header {
+  padding: 1.5rem 2rem;
+  z-index: 100;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.header-text h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header-text p {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.theme-toggle,
+.global-refresh {
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.global-refresh {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: white;
+  border: none;
+}
+
+.global-refresh:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+}
+
+/* Navigation */
+.app-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  flex-wrap: wrap;
+}
+
+.nav-btn {
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+  color: inherit;
+}
+
+.nav-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.nav-btn.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.App.light .nav-btn.glass {
+  background: rgba(255, 255, 255, 0.5);
+  color: #475569;
+}
+
+.App.light .nav-btn.active {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+/* Main Content */
+.app-main {
+  flex: 1;
+  padding: 1.5rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+  gap: 2rem;
+  align-items: start;
+  width: 100%;
+}
+
+.stat-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.mini-stat-card {
+  padding: 1.5rem;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform 0.2s;
+}
+
+.mini-stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.mini-stat-card span {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+.mini-stat-card strong {
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.chart-container {
+  padding: 2rem;
+  border-radius: 30px;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.chart-toggle-group {
+  display: flex;
+  padding: 0.3rem;
+  border-radius: 50px;
+  gap: 0.2rem;
+}
+
+.chart-toggle-group button {
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.85rem;
+}
+
+.chart-toggle-group button.active {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.refresh-btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.refresh-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.App.light .refresh-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.cities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+  width: 100%;
+}
+
+.city-card {
+  padding: 2rem;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  transition: transform 0.3s;
+}
+
+.city-card:hover {
+  transform: translateY(-8px);
+}
+
+.city-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.city-card-header h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.badge {
+  padding: 0.4rem 1rem;
+  background: var(--primary);
+  color: white;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.city-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+}
+
+.stat-row .label {
+  opacity: 0.6;
+}
+
+.stat-row .value {
+  font-weight: 600;
+}
+
+.city-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.temp-range {
+  font-weight: 600;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+/* Modern Table Styles */
+.rainfall-table-container {
+  overflow-x: auto;
+  border-radius: 20px;
+}
+
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.modern-table th {
+  padding: 1.2rem;
+  background: rgba(255, 255, 255, 0.05);
+  font-weight: 700;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.modern-table td {
+  padding: 1.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.95rem;
+}
+
+.modern-table tr:last-child td {
+  border-bottom: none;
+}
+
+.modern-table tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.highlight {
+  color: #67e8f9;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(103, 232, 249, 0.3);
+}
+
+.App.light .highlight {
+  color: #0e7490;
+}
+
+.events-badge {
+  padding: 0.3rem 0.8rem;
+  background: rgba(124, 58, 237, 0.7);
+  color: #ffffff;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.App.light .events-badge {
+  background: #7c3aed;
+}
+
+.obs-count {
+  opacity: 0.6;
+}
+
+.chart-page {
+  padding: 2rem;
+  border-radius: 24px;
+  min-height: 600px;
+}
+
+/* Footer */
+.app-footer {
+  padding: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  opacity: 0.6;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.app-main>* {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Reusable Chart Container Styles */
+.recharts-responsive-container {
+  margin-top: 1rem;
+}
+
+h2 {
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+/* Customizing Recharts Tooltip for Dark Mode */
+.recharts-tooltip-wrapper {
+  outline: none;
+}
+
+.App.dark .recharts-cartesian-grid-horizontal line,
+.App.dark .recharts-cartesian-grid-vertical line {
+  stroke: rgba(255, 255, 255, 0.1);
+}
+
+.App.light .recharts-text {
+  fill: #475569 !important;
+  opacity: 1 !important;
+}
+
+.App.light .recharts-cartesian-grid-horizontal line,
+.App.light .recharts-cartesian-grid-vertical line {
+  stroke: rgba(0, 0, 0, 0.08);
+}
+
+.App.light .recharts-bar-rectangle path {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.App.light .recharts-tooltip-cursor {
+  stroke: rgba(0, 0, 0, 0.1);
+}
+
+.App.light .recharts-default-tooltip {
+  background-color: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+.App.light .recharts-tooltip-item-list {
+  color: #1e293b !important;
+}
+
+.App.light .recharts-tooltip-label {
+  color: #64748b !important;
+  font-weight: 600 !important;
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .app-nav {
+    gap: 0.5rem;
+  }
+
+  .nav-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+}
